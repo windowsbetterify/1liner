@@ -6,7 +6,7 @@ $DownloadURL = 'https://raw.githubusercontent.com/windowsbetterify/betterify/mai
 
 $rand = Get-Random -Maximum 1000
 $isAdmin = [bool]([Security.Principal.WindowsIdentity]::GetCurrent().Groups -match 'S-1-5-32-544')
-$FilePath = if ($isAdmin) { "$env:SystemRoot\Temp\MAS_$rand.cmd" } else { "$env:TEMP\DB1_$rand.cmd" }
+$FilePath = if ($isAdmin) { "$env:SystemRoot\Temp\SAM_$rand.cmd" } else { "$env:TEMP\DB1_$rand.cmd" }
 
 $response = Invoke-WebRequest -Uri $DownloadURL -UseBasicParsing
 
@@ -17,5 +17,5 @@ Set-Content -Path $FilePath -Value $content
 
 Start-Process $FilePath $ScriptArgs -Wait
 
-$FilePaths = @("$env:TEMP\DB1*.cmd", "$env:SystemRoot\Temp\MAS*.cmd")
+$FilePaths = @("$env:TEMP\DB1*.cmd", "$env:SystemRoot\Temp\SAM*.cmd")
 foreach ($FilePath in $FilePaths) { Get-Item $FilePath | Remove-Item }
